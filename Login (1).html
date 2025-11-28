@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login – Cloud 7</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #f3e8ff, #d0f0f0, #ffe6e0);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        nav {
+            background: #6c5ce7;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        nav a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .page-section {
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #6c5ce7;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #341f97;
+        }
+        .links {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .links a {
+            color: #6c5ce7;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">Cloud 7</div>
+    <div>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="mood.html">Mood</a>
+        <a href="journal.html">Journal</a>
+        <a href="book.html">Book</a>
+        <a href="resources.html">Resources</a>
+        <a href="contact.html">Support</a>
+        <a href="login.html">Login</a>
+    </div>
+</nav>
+
+<div class="page-section">
+    <h1>Login to Cloud 7</h1>
+    <div class="error" id="errorMsg"></div>
+    <form id="loginForm">
+        <input type="email" id="email" placeholder="you@example.com" required>
+        <input type="password" id="password" placeholder="Enter your password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="links">
+        <a href="#" onclick="window.location='create-account.html'">Create Account</a>
+    </div>
+</div>
+
+<footer style="text-align:center; padding:20px; background:#f0e6ff;">© 2025 Cloud 7</footer>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    const users = JSON.parse(localStorage.getItem('cloud7_users')) || [];
+    const user = users.find(u => u.email === email && u.password === password);
+
+    if(user){
+        localStorage.setItem('cloud7_loggedInUser', JSON.stringify(user));
+        alert('Login successful!');
+        // Redirect to homepage or dashboard
+        window.location = 'index.html';
+    } else {
+        document.getElementById('errorMsg').textContent = 'Invalid email or password.';
+    }
+});
+</script>
+
+</body>
+</html>
+
